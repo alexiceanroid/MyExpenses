@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Expenses All"
   DTS:PackageType="5"
-  DTS:VersionBuild="3"
-  DTS:VersionGUID="{138FF88A-8575-4C11-BC4C-01180981E310}">
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{77DEAE6B-49C6-4296-AFBE-B66543B57477}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -26,7 +26,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="ETL history - failure"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -43,7 +43,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="ETL history - success"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -62,23 +62,6 @@
       <DTS:Variables />
       <DTS:Executables>
         <DTS:Executable
-          DTS:refId="Package\Sequence Container\Execute Expenses - Raif"
-          DTS:CreationName="Microsoft.ExecutePackageTask"
-          DTS:Description="Execute Package Task"
-          DTS:DTSID="{E6A0C99D-99A0-4826-9411-6A4424B769F5}"
-          DTS:ExecutableType="Microsoft.ExecutePackageTask"
-          DTS:LocaleID="-1"
-          DTS:ObjectName="Execute Expenses - Raif"
-          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-          <DTS:Variables />
-          <DTS:ObjectData>
-            <ExecutePackageTask>
-              <UseProjectReference>True</UseProjectReference>
-              <PackageName>Expenses.Raif.dtsx</PackageName>
-            </ExecutePackageTask>
-          </DTS:ObjectData>
-        </DTS:Executable>
-        <DTS:Executable
           DTS:refId="Package\Sequence Container\Execute Expenses - Tinkoff"
           DTS:CreationName="Microsoft.ExecutePackageTask"
           DTS:Description="Execute Package Task"
@@ -96,16 +79,6 @@
           </DTS:ObjectData>
         </DTS:Executable>
       </DTS:Executables>
-      <DTS:PrecedenceConstraints>
-        <DTS:PrecedenceConstraint
-          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
-          DTS:CreationName=""
-          DTS:DTSID="{1E3584AA-AB63-4ACE-AF43-73A252656B1D}"
-          DTS:From="Package\Sequence Container\Execute Expenses - Tinkoff"
-          DTS:LogicalAnd="True"
-          DTS:ObjectName="Constraint"
-          DTS:To="Package\Sequence Container\Execute Expenses - Raif" />
-      </DTS:PrecedenceConstraints>
     </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
@@ -151,44 +124,6 @@
           Size="213,42"
           Id="Package\Sequence Container\Execute Expenses - Tinkoff"
           TopLeft="55,28" />
-        <NodeLayout
-          Size="199,42"
-          Id="Package\Sequence Container\Execute Expenses - Raif"
-          TopLeft="93,97" />
-        <EdgeLayout
-          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
-          TopLeft="161.5,70">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="31,27"
-              Start="0,0"
-              End="31,19.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,9.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,9.5"
-                    Point2="0,13.5"
-                    Point3="4,13.5" />
-                  <mssgle:LineSegment
-                    End="27,13.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="27,13.5"
-                    Point2="31,13.5"
-                    Point3="31,17.5" />
-                  <mssgle:LineSegment
-                    End="31,19.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
