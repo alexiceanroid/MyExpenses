@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="merge_Expenses.sql"
+  DTS:DTSID="{3BB68610-604A-4B99-A95B-D87700C1506E}"
+  DTS:CreationName="FILE">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="C:\Users\Alex\Google Drive\expenses\sql scripts\merge_Expenses.sql" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

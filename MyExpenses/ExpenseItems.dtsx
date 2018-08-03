@@ -1,0 +1,637 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/27/2017 1:51:34 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MSKNB-184"
+  DTS:CreatorName="T-SYSTEMS\amalyshk"
+  DTS:Description="SSIS Package Description"
+  DTS:DTSID="{9D20D0CA-668A-45F4-89BB-003C0F060F19}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.107"
+  DTS:LocaleID="1049"
+  DTS:MaxErrorCount="0"
+  DTS:ObjectName="ExpenseItems"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{A9380A54-D48E-4CD1-BB32-12DD032AC42C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DestinationConnectionOLEDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D682A471-6A34-4442-89DA-521C8331E9ED}"
+      DTS:ObjectName="DestinationConnectionOLEDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Initial Catalog=Expenses;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=false;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SourceConnectionExcel]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{356F4F42-0DE1-4AB1-B08E-AA45F7CCC11B}"
+      DTS:ObjectName="SourceConnectionExcel">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\google drive\pers\expenses\custom mappings\Categorization.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task 1"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{78D41BF9-C36E-462C-BE0E-85C907E0FF03}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task 1"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          defaultBufferSize="3145728"
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task 1\ADO NET Destination"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination."
+              name="ADO NET Destination"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The Destination database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."ExpenseItem"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows per batch. The default is 0 which uses the same size as SSIS internal buffer. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out. A value of 0 indicates infinite time-out. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to use the SqlBulkCopy interface to improve the performance of bulk insert operations. Only certain providers support this interface."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task 1\ADO NET Destination.Connections[IDbConnection]"
+                  connectionManagerID="{3BD94948-7738-4780-BE70-67FDC23C3BFE}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DbExpenses]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task 1\ADO NET Destination.Inputs[ADO NET Destination Input]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="ADO NET Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\ADO NET Destination.Inputs[ADO NET Destination Input].Columns[ActualName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ActualName"
+                      externalMetadataColumnId="Package\Data Flow Task 1\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ActualName]"
+                      lineageId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].Columns[ActualName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\ADO NET Destination.Inputs[ADO NET Destination Input].Columns[HumanName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="HumanName"
+                      externalMetadataColumnId="Package\Data Flow Task 1\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[HumanName]"
+                      lineageId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].Columns[HumanName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\ADO NET Destination.Inputs[ADO NET Destination Input].Columns[SubCategory]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="SubCategory"
+                      externalMetadataColumnId="Package\Data Flow Task 1\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[SubCategory]"
+                      lineageId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].Columns[SubCategory]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\ADO NET Destination.Inputs[ADO NET Destination Input].Columns[ExactDate]"
+                      cachedDataType="date"
+                      cachedName="ExactDate"
+                      externalMetadataColumnId="Package\Data Flow Task 1\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ExactDate]"
+                      lineageId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].Columns[ExactDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ID]"
+                      dataType="i4"
+                      name="ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ExactDate]"
+                      dataType="dbTimeStamp"
+                      name="ExactDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ActualName]"
+                      dataType="wstr"
+                      length="250"
+                      name="ActualName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[HumanName]"
+                      dataType="wstr"
+                      length="250"
+                      name="HumanName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[SubCategory]"
+                      dataType="wstr"
+                      length="250"
+                      name="SubCategory" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task 1\ADO NET Destination.Outputs[ADO NET Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="ADO NET Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task 1\ADO NET Destination.Inputs[ADO NET Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task 1\Source - Query"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Source - Query"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select *
+from `Item$`
+where ActualName is not null</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task 1\Source - Query.Connections[OleDbConnection]"
+                  connectionManagerID="{A8738F25-5474-42C1-87D2-530145B70B1B}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Source Categories]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].Columns[ActualName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].ExternalColumns[ActualName]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].Columns[ActualName]"
+                      name="ActualName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].Columns[HumanName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].ExternalColumns[HumanName]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].Columns[HumanName]"
+                      name="HumanName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].Columns[SubCategory]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].ExternalColumns[SubCategory]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].Columns[SubCategory]"
+                      name="SubCategory"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].Columns[Category]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].ExternalColumns[Category]"
+                      lineageId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].Columns[Category]"
+                      name="Category"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].Columns[ExactDate]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].ExternalColumns[ExactDate]"
+                      lineageId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].Columns[ExactDate]"
+                      name="ExactDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].ExternalColumns[ActualName]"
+                      dataType="wstr"
+                      length="255"
+                      name="ActualName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].ExternalColumns[HumanName]"
+                      dataType="wstr"
+                      length="255"
+                      name="HumanName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].ExternalColumns[SubCategory]"
+                      dataType="wstr"
+                      length="255"
+                      name="SubCategory" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].ExternalColumns[Category]"
+                      dataType="r8"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output].ExternalColumns[ExactDate]"
+                      dataType="date"
+                      name="ExactDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Error Output].Columns[ActualName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Error Output].Columns[ActualName]"
+                      name="ActualName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Error Output].Columns[HumanName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Error Output].Columns[HumanName]"
+                      name="HumanName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Error Output].Columns[Category]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Error Output].Columns[Category]"
+                      name="Category" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Error Output].Columns[SubCategory]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Error Output].Columns[SubCategory]"
+                      name="SubCategory" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Error Output].Columns[ExactDate]"
+                      dataType="date"
+                      lineageId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Error Output].Columns[ExactDate]"
+                      name="ExactDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task 1.Paths[Excel Source Output]"
+              endId="Package\Data Flow Task 1\ADO NET Destination.Inputs[ADO NET Destination Input]"
+              name="Excel Source Output"
+              startId="Package\Data Flow Task 1\Source - Query.Outputs[Excel Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ETL history - failure"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{ff5a44ce-d57e-42a5-9819-85cb3132b01c}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ETL history - failure"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{3BD94948-7738-4780-BE70-67FDC23C3BFE}"
+          SQLTask:SqlStatementSource="insert into dbo.EtlHistory(TableName, Success)&#xA;values ('dbo.ExpenseItem', 0)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ETL history - success"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{4dc675d9-4e21-40d0-9d4f-3e58b28c644c}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ETL history - success"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{3BD94948-7738-4780-BE70-67FDC23C3BFE}"
+          SQLTask:SqlStatementSource="insert into dbo.EtlHistory(TableName, Success)&#xA;values ('dbo.ExpenseItem', 1)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Purge DB table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{A32D8843-03B2-466C-A020-4BE409AAD5C9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Purge DB table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{3BD94948-7738-4780-BE70-67FDC23C3BFE}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [dbo].[ExpenseItem]&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{D4BB72B6-C14E-4E5C-8DCA-30462F210518}"
+      DTS:From="Package\Data Flow Task 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\ETL history - success" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{14763252-EFC5-4E4B-B1A5-B8CF89726171}"
+      DTS:From="Package\Data Flow Task 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\ETL history - failure"
+      DTS:Value="1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[{7DD4AC40-CB0F-4F03-96BD-166B1D3A83E1\}]"
+      DTS:CreationName=""
+      DTS:DTSID="{7DD4AC40-CB0F-4F03-96BD-166B1D3A83E1}"
+      DTS:From="Package\Purge DB table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="{7DD4AC40-CB0F-4F03-96BD-166B1D3A83E1}"
+      DTS:To="Package\Data Flow Task 1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="164,42"
+          Id="Package\Data Flow Task 1"
+          TopLeft="22,107.5" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\ETL history - failure"
+          TopLeft="342,217" />
+        <NodeLayout
+          Size="184,42"
+          Id="Package\ETL history - success"
+          TopLeft="20,203" />
+        <NodeLayout
+          Size="153,42"
+          Id="Package\Purge DB table"
+          TopLeft="84.5,12.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="108,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53.5"
+              Start="0,0"
+              End="0,46">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="130,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="299,67.5"
+              Start="0,0"
+              End="299,60">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.3913043478261" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.3913043478261"
+                    Point2="0,27.3913043478261"
+                    Point3="4,27.3913043478261" />
+                  <mssgle:LineSegment
+                    End="295,27.3913043478261" />
+                  <mssgle:CubicBezierSegment
+                    Point1="295,27.3913043478261"
+                    Point2="299,27.3913043478261"
+                    Point3="299,31.3913043478261" />
+                  <mssgle:LineSegment
+                    End="299,60" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="134.25865234375,32.3913043478261,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[{7DD4AC40-CB0F-4F03-96BD-166B1D3A83E1\}]"
+          TopLeft="161,54.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-57,53"
+              Start="0,0"
+              End="-57,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.5"
+                    Point2="0,26.5"
+                    Point3="-4,26.5" />
+                  <mssgle:LineSegment
+                    End="-53,26.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-53,26.5"
+                    Point2="-57,26.5"
+                    Point3="-57,30.5" />
+                  <mssgle:LineSegment
+                    End="-57,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task 1">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="153,42"
+          Id="Package\Data Flow Task 1\Source - Query"
+          TopLeft="22,5.5" />
+        <NodeLayout
+          Size="186,42"
+          Id="Package\Data Flow Task 1\ADO NET Destination"
+          TopLeft="7,110" />
+        <EdgeLayout
+          Id="Package\Data Flow Task 1.Paths[Excel Source Output]"
+          TopLeft="99.25,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,62.5"
+              Start="0,0"
+              End="0,55">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task 1\ADO NET Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task 1\Source - Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
