@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Compensation"
   DTS:PackageType="5"
-  DTS:VersionBuild="4"
-  DTS:VersionGUID="{9B9248C7-554D-4FB9-BCC7-030B7002AD6B}">
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{DC57061C-4324-4583-BE39-856599C01CE7}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -188,8 +188,8 @@
                   description="The SQL command to be executed."
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select *
-from `Item$`
-where ActualName is not null</property>
+from `Sheet1$`
+where date is not null</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -198,7 +198,7 @@ where ActualName is not null</property>
                   dataType="System.Int32"
                   description="Specifies the mode used to access the database."
                   name="AccessMode"
-                  typeConverter="AccessMode">0</property>
+                  typeConverter="AccessMode">2</property>
                 <property
                   dataType="System.String"
                   description="The mapping from parameters in the SQL command to variables."
@@ -426,39 +426,17 @@ where ActualName is not null</property>
           Id="Package\Data Flow Task 1"
           TopLeft="29,109" />
         <NodeLayout
-          Size="153,42"
-          Id="Package\Purge DB table"
-          TopLeft="39.5,16" />
+          Size="174,42"
+          Id="Package\ETL history - failure"
+          TopLeft="349,218.5" />
         <NodeLayout
           Size="184,42"
           Id="Package\ETL history - success"
           TopLeft="27,204.5" />
         <NodeLayout
-          Size="174,42"
-          Id="Package\ETL history - failure"
-          TopLeft="349,218.5" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[{7DD4AC40-CB0F-4F03-96BD-166B1D3A83E1\}]"
-          TopLeft="113.5,58">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,51"
-              Start="0,0"
-              End="0,43.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,43.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          Size="153,42"
+          Id="Package\Purge DB table"
+          TopLeft="39.5,16" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="115,151">
@@ -515,6 +493,28 @@ where ActualName is not null</property>
             <mssgm:EdgeLabel
               BoundingBox="134.25865234375,32.3913043478261,30.4826953125,9.7490234375"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[{7DD4AC40-CB0F-4F03-96BD-166B1D3A83E1\}]"
+          TopLeft="113.5,58">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51"
+              Start="0,0"
+              End="0,43.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
